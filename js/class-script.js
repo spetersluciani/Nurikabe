@@ -7,6 +7,7 @@ class Board {
         this.shadeCount = 0;
         this.checkShadeLimit = this.checkShadeLimit.bind(this);
         this.checkTwoByTwo = this.checkTwoByTwo.bind(this);
+        this.checkShadeContinuity = this.checkShadeContinuity.bind(this);
         this.verify = this.verify.bind(this);
     }
 
@@ -57,6 +58,11 @@ class Board {
             return false;
         }
 
+        if (!this.checkShadeContinuity()) {
+            console.log('Not passed.');
+            return false;
+        }
+
         return true;
     }
 
@@ -102,6 +108,66 @@ class Board {
         
     }
 
+    checkShadeContinuity() {
+        let pathCount = 0;
+        let cellCount = 0;
+        for (let cell in this.cells) {
+            if (this.cells[cell].color === 'black' && this.cells[cell].status !== 'checked') {
+                pathCount++;
+                cellCount++;
+                this.cells[cell].status = 'checked';
+
+                let queue = [];
+                queue.push(this.cells[cell]);
+                while (queue.length > 0) {
+                    let current = queue.pop();
+
+                    if (current.right && current.right.color === 'black' && current.right.status !== 'checked') {
+                        current.right.status = 'checked';
+                        queue.push(current.right);
+                        cellCount++;
+                    }
+
+                    if (current.down && current.down.color === 'black' && current.down.status !== 'checked') {
+                        current.down.status = 'checked';
+                        queue.push(current.down);
+                        cellCount++;
+                    }
+
+                    if (current.left && current.left.color === 'black' && current.left.status !== 'checked') {
+                        current.left.status = 'checked';
+                        queue.push(current.left);
+                        cellCount++;
+                    }
+
+                    if (current.up && current.up.color === 'black' && current.up.status !== 'checked') {
+                        current.up.status = 'checked';
+                        queue.push(current.up);
+                        cellCount++;
+                    }
+                }
+            }
+        }
+
+        if (cellCount !== this.shadeCount) {
+            window.alert('Cell count error');
+            for (let cell in this.cells) {
+                this.cells[cell].status = 'unchecked';
+            }
+            return false;
+        }
+
+        if (pathCount != 1) {
+            window.alert('No continuous path.');
+            for (let cell in this.cells) {
+                this.cells[cell].status = 'unchecked';
+            }
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
         this.element.classList.add('board');
         for (let i = 0; i < this.cells.length; i++) {
@@ -116,7 +182,7 @@ class Board {
 class Cell {
     constructor() {
         this.color = 'white';
-        this.state = 'unset';
+        this.state = 'unchecked';
         this.up = null;
         this.down = null;
         this.left = null;
@@ -219,7 +285,7 @@ container.append(board.element);
 let checkButton = document.createElement('button');
 checkButton.append(document.createTextNode('Check'));
 checkButton.addEventListener('click', function () {
-    if(board.verify()) {
+    if (board.verify()) {
         window.alert('passed');
     }
 });
