@@ -1,20 +1,78 @@
+html, body {
+    margin: 0;
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
 * {
     box-sizing: border-box;
 }
 
+.container {
+    padding: 32px;
+    margin: auto;
+    max-width: 1200px;
+    width: 100%;;
+}
+
+.puzzle-container, .rules-container {
+    float: left;
+    width: 50%;
+}
+
+.button-container {
+    margin: auto;
+    padding: 32px;
+    text-align: center;
+}
+
+button {
+    padding: 12px;
+    margin: 0 8px;
+}
+
+h1, h2 {
+    font-family: 'Nerko One', cursive;
+}
+
+h1, h2 {
+    margin-top: 0;
+}
+
+ol {
+    padding-left: 16px;
+}
+
+li {
+    margin-bottom: 12px;
+}
+
+.passed {
+    color: green;
+    font-weight: bold;
+    text-decoration: line-through;
+}
+
+.failed {
+    color: red;
+    font-weight: bold;
+}
+
 .board {
     border: 1px solid black;
-    height: 127px;
-    width: 127px;
+    height: 252px;
+    width: 252px;
     clear: both;
+    margin: auto;
 }
 
 .cell {
     border: 1px solid black;
+    font-size: 1.5em;
     float: left;
-    height: 25px;
-    width: 25px;
-    padding: 3px 7px;
+    height: 50px;
+    width: 50px;
+    padding: 10px 18px;
 }
 
 .cell.shaded {

@@ -1,12 +1,33 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Nurikabe Puzzle</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nerko+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./css/style.css" />
     </head>
     <body>
-        <div id="container">
-            
+        <div class="container">
+            <div id="puzzle_container" class="puzzle-container">
+                <div id="board_container" class="board-container">
+                    
+                </div>
+                <div id="button_container" class="button-container">
+
+                </div>
+            </div>
+            <div class="rules-container">
+                <h1>Nurikabe Puzzle</h1>
+                <h2>How to play</h2>
+                <p>Click on the cells to form regions containing the number of cells indicated by each number. </p>
+                <ol>
+                    <li>Numbered cells cannot be shaded</li>
+                    <li>The shaded cells must form a contiguous path</li>
+                    <li>There cannot be any 2 x 2 blocks</li>
+                    <li>Unshaded regions cannot touch vertically or horizontally</li>
+                </ol>
+            </div>
         </div>
-        <script src="./js/class-script.js"></script>
+        <script src="./js/script.js"></script>
     </body>
 </html>
